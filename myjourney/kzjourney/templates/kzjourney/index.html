@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .user-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-info p {
+            font-size: 1.2em;
+            margin: 8px 0;
+        }
+        
+        .journeys-container {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .journey-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .journey-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .journey-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+        
+        .journey-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+        }
+        
+        .journey-dates {
+            font-size: 0.9em;
+            color: #c0c0c0;
+            font-style: italic;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #ffd700;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Learning Journey </h1>
+            
+        </header>
+        
+        <div class="journeys-container">
+            {% for journey in journeys %}
+            <div class="journey-card">
+                <div class="journey-title">{{ journey.title }}</div>
+                <div class="journey-description">{{ journey.description }}</div>
+                <div class="journey-dates">
+                    Started: {{ journey.date_started }} 
+                    {% if journey.date_completed %} | Completed: {{ journey.date_completed }}{% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>No journeys yet. Start your learning adventure! 🚀</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="{% url 'aboutMe' %}" class="nav-link"> Learn More About Me</a>
+        </div>
+    </div>
+</body>
+</html>
+

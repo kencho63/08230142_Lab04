@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+        }
+        
+        .people-container {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .info-item {
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .info-item strong {
+            font-size: 1.1em;
+            color: #ffd700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .info-item p, .info-item span {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #f0f0f0;
+        }
+        
+        .bio {
+            padding: 15px;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .icon {
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 40px; font-size: 2.5em; color: #ffd700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">About Us</h1>
+        
+        <div class="people-container">
+            {% for about in abouts %}
+            <div class="card">
+                <h2 style="font-size: 1.8em; margin-bottom: 20px; color: #ffd700;">{{ about.name }}</h2>
+                
+                <div class="info-item">
+                    <strong><span class="icon"></span>Student ID</strong>
+                    <p>{{ about.student_id }}</p>
+                </div>
+                
+                <div class="info-item">
+                    <strong><span class="icon"></span>Email Address</strong>
+                    <p>{{ about.email }}</p>
+                </div>
+                
+                <div class="info-item">
+                    <strong><span class="icon"></span>Bio</strong>
+                </div>
+                <div class="bio">{{ about.bio }}</div>
+            </div>
+            {% empty %}
+            <div class="card">
+                <h2 style="text-align: center; color: #ffd700; font-size: 1.5em;">No information available yet.</h2>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <a href="{% url 'index' %}" class="nav-link"> Back to Journey</a>
+    </div>
+</body>
+</html>
+
